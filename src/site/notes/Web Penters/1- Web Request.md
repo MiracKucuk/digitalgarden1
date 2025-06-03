@@ -2,7 +2,7 @@
 {"dg-publish":true,"permalink":"/web-penters/1-web-request/"}
 ---
 
- `www.hackthebox.com` gibi istenen web sitesine ulaşmak için bir ==Uniform Resource Locator (`URL`)== olarak ==Fully Qualified Domain Name (`FQDN`)== giriyoruz.
+ `www.hackthebox.com` gibi istenen web sitesine ulaşmak için bir `Uniform Resource Locator` (`URL`) olarak `Fully Qualified Domain Name` (`FQDN`) giriyoruz.
 
 
 ## URL

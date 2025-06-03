@@ -21,7 +21,7 @@
 | **Query String** | `?login=true`         | Query stringi bir soru işareti `?` ile başlar ve bir parametre (ör. `login`) ile bir değer (ör. `true`) içerir. Birden fazla parametre, `&` işareti ile ayrılabilir. (`login=true&user=admin`) |
 | **Fragments**    | `#status`             | Fragments, client tarafında tarayıcılar tarafından işlenir ve birincil kaynağın içinde bir bölümün (ör. bir başlık veya sayfa bölümü) yerini bulmak için kullanılır.                           |
 
-Bir kaynağa erişmek için tüm bileşenler gerekli değildir. Ana zorunlu alanlar ==scheme== ve ==host=='tur, bunlar olmadan request'te bulunulacak kaynak olmaz.
+Bir kaynağa erişmek için tüm bileşenler gerekli değildir. Ana zorunlu alanlar `scheme` ve `host`'tur, bunlar olmadan request'te bulunulacak kaynak olmaz.
 
 
 ## HTTP Flow
@@ -99,15 +99,15 @@ HTTPS uygulayan web siteleri, URL'lerindeki `https://` (örneğin `https://www.g
 
 ![Pasted image 20241224202642.png](/img/user/resimler/Pasted%20image%2020241224202642.png)
 
-Not: HTTPS protokolü aracılığıyla aktarılan veriler şifrelenmiş olsa da, istek ==clear-text== bir DNS sunucusuyla iletişime geçerse ziyaret edilen URL'yi yine de açığa çıkarabilir. Bu nedenle, şifreli DNS sunucularının (örn. `8.8.8.8` veya `1.1.1.1`) kullanılması veya tüm trafiğin düzgün bir şekilde şifrelendiğinden emin olmak için bir VPN servislerinden yararlanılması önerilir.
+Not: HTTPS protokolü aracılığıyla aktarılan veriler şifrelenmiş olsa da, istek `clear-text` bir DNS sunucusuyla iletişime geçerse ziyaret edilen URL'yi yine de açığa çıkarabilir. Bu nedenle, şifreli DNS sunucularının (örn. `8.8.8.8` veya `1.1.1.1`) kullanılması veya tüm trafiğin düzgün bir şekilde şifrelendiğinden emin olmak için bir VPN servislerinden yararlanılması önerilir.
 
 ## HTTPS Flow
 
 ![Pasted image 20241224202749.png](/img/user/resimler/Pasted%20image%2020241224202749.png)
 
-Eğer HTTPS yerine bir web sitesine **`http://`** ile erişmeye çalışırsak ve site HTTPS zorunluluğu uygularsa, tarayıcı önce domain'i çözümler ve hedef web sitesini barındıran web sunucusuna yönlendirme yapar. İlk olarak, şifrelenmemiş HTTP protokolü üzerinden port `80`'e bir request gönderilir. Sunucu bunu algılar ve client'i, ==`301` `Moved Permanently`== response kodu ile güvenli ==HTTPS portu `443`=='e yönlendirir. 
+Eğer HTTPS yerine bir web sitesine **`http://`** ile erişmeye çalışırsak ve site HTTPS zorunluluğu uygularsa, tarayıcı önce domain'i çözümler ve hedef web sitesini barındıran web sunucusuna yönlendirme yapar. İlk olarak, şifrelenmemiş HTTP protokolü üzerinden port `80`'e bir request gönderilir. Sunucu bunu algılar ve client'i, `301` `Moved Permanently` response kodu ile güvenli HTTPS portu `443`'e yönlendirir. 
 
-Sonrasında, client (web tarayıcısı) kendisi hakkında bilgi veren bir "==`client hello`==" paketi gönderir. Buna karşılık, sunucu bir "==`server hello`==" ile yanıt verir ve SSL sertifikalarını değiştirmek için bir [anahtar değişimi (key exchange)](https://en.wikipedia.org/wiki/Key_exchange) başlatır. Client bu anahtarı/sertifikayı doğrular ve kendi sertifikasını gönderir. Ardından, şifrelenmiş bir [handshake](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake) gerçekleştirilir ve şifreleme ile veri aktarımının düzgün çalışıp çalışmadığı doğrulanır.
+Sonrasında, client (web tarayıcısı) kendisi hakkında bilgi veren bir "`client hello`" paketi gönderir. Buna karşılık, sunucu bir "`server hello`" ile yanıt verir ve SSL sertifikalarını değiştirmek için bir [anahtar değişimi (key exchange)](https://en.wikipedia.org/wiki/Key_exchange) başlatır. Client bu anahtarı/sertifikayı doğrular ve kendi sertifikasını gönderir. Ardından, şifrelenmiş bir [handshake](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake) gerçekleştirilir ve şifreleme ile veri aktarımının düzgün çalışıp çalışmadığı doğrulanır.
 
 **Not:** Belirli durumlarda, bir saldırgan **`HTTP Downgrade`** saldırısı gerçekleştirebilir. Bu saldırı, HTTPS iletişimini HTTP'ye indirger ve veri clear text olarak aktarılır. Bu, kullanıcı farkında olmadan tüm trafiği saldırganın host'u üzerinden yönlendirmek için bir **Man-In-The-Middle (MITM)** proxy kurulumu ile yapılır. Ancak, modern tarayıcılar, sunucular ve web uygulamaları bu tür saldırılara karşı koruma sağlamaktadır.
 
@@ -154,7 +154,7 @@ Herhangi bir HTTP isteğinin ilk satırı 'boşluklarla ayrılmış' üç ana al
 | **Path**    | `/users/login.html` | Erişilen kaynağın yolunu ifade eder. Bu alan, bir query stringiyle de sonlandırılabilir (ör. `?username=user`). |
 | **Version** | `HTTP/1.1`          | Üçüncü ve son alan, kullanılan HTTP versiyonunu belirtir.                                                       |
 
-Sonraki satır kümesi ==`Host`==, ==`User-Agent`==, ==`Cookie`== ve diğer birçok olası header gibi HTTP header değer çiftlerini içerir. Bu header'lar bir request'in çeşitli attribute'lerini belirtmek için kullanılır. Headerlar, sunucunun isteği doğrulaması için gerekli olan yeni bir satırla sonlandırılır. Son olarak, bir request, request body ve data ile bitebilir.
+Sonraki satır kümesi `Host`, `User-Agent`, `Cookie` ve diğer birçok olası header gibi HTTP header değer çiftlerini içerir. Bu header'lar bir request'in çeşitli attribute'lerini belirtmek için kullanılır. Headerlar, sunucunun isteği doğrulaması için gerekli olan yeni bir satırla sonlandırılır. Son olarak, bir request, request body ve data ile bitebilir.
 
 Not: HTTP sürüm `1.X` request'leri açık metin olarak gönderir ve farklı alanları ve farklı istekleri ayırmak için yeni satır karakteri kullanır. HTTP sürüm `2.X` ise istekleri sözlük biçiminde `binary` data olarak gönderir.
 
@@ -174,7 +174,7 @@ Accept: text/html
 
 ![Pasted image 20241224205735.png](/img/user/resimler/Pasted%20image%2020241224205735.png)
 
-Bir HTTP response'unun ilk satırı boşluklarla ayrılmış iki alan içerir. Bunlardan ilki ==HTTP sürümü== (örn. `HTTP/1.1`), ikincisi ise ==HTTP response kodudur== (örn. `200 OK`).
+Bir HTTP response'unun ilk satırı boşluklarla ayrılmış iki alan içerir. Bunlardan ilki HTTP sürümü (örn. `HTTP/1.1`), ikincisi ise HTTP response kodudur (örn. `200 OK`).
 
 Response kodları, daha sonraki bir bölümde tartışılacağı gibi, isteğin durumunu belirlemek için kullanılır. İlk satırdan sonra yanıt, HTTP isteğine benzer şekilde başlıklarını listeler. Hem request hem de response header'ları bir sonraki bölümde ele alınacaktır.
 
@@ -312,7 +312,7 @@ Son olarak, **Security Headers**'a sahibiz. Tarayıcı çeşitliliği ve web tab
 
 ## cURL
 
-Eğer sadece response header'larını görmek istiyorsak, ==`-I`== bayrağını kullanarak `HEAD` request'i gönderebilir ve sadece response header'larını görüntüleyebiliriz. Ayrıca, hem header'ları hem de response body'yi (örneğin HTML kodu) görüntülemek için `-i` bayrağını kullanabiliriz. İkisi arasındaki fark, `-I` bir `HEAD` isteği gönderirken (bir sonraki bölümde göreceğimiz gibi), `-i` belirttiğimiz herhangi bir request gönderir ve header'ları da yazdırır.
+Eğer sadece response header'larını görmek istiyorsak, `-I` bayrağını kullanarak `HEAD` request'i gönderebilir ve sadece response header'larını görüntüleyebiliriz. Ayrıca, hem header'ları hem de response body'yi (örneğin HTML kodu) görüntülemek için `-i` bayrağını kullanabiliriz. İkisi arasındaki fark, `-I` bir `HEAD` isteği gönderirken (bir sonraki bölümde göreceğimiz gibi), `-i` belirttiğimiz herhangi bir request gönderir ve header'ları da yazdırır.
 
 ```shell-session
 M1R4CKCK@htb[/htb]$ curl -I https://www.inlanefreight.com
@@ -337,7 +337,7 @@ Strict-Transport-Security: max-age=31536000
 Referrer-Policy: origin
 ```
 
-Headerları görüntülemenin yanı sıra, cURL, daha sonraki bir bölümde göreceğimiz gibi, ==`-H`== bayrağı ile request headerlarını ayarlamamıza da izin verir. `User-Agent` veya `Cookie` header'ları gibi bazı header'ların kendi bayrakları vardır. Örneğin, `User-Agent`'ımızı ayarlamak için `-A`'yı aşağıdaki gibi kullanabiliriz:
+Headerları görüntülemenin yanı sıra, cURL, daha sonraki bir bölümde göreceğimiz gibi, `-H` bayrağı ile request headerlarını ayarlamamıza da izin verir. `User-Agent` veya `Cookie` header'ları gibi bazı header'ların kendi bayrakları vardır. Örneğin, `User-Agent`'ımızı ayarlamak için `-A`'yı aşağıdaki gibi kullanabiliriz:
 
 ```shell-session
 M1R4CKCK@htb[/htb]$ curl https://www.inlanefreight.com -A 'Mozilla/5.0'
@@ -354,7 +354,7 @@ Son olarak, tarayıcı devtools kullanarak HTTP header'larını nasıl önizleye
 
 ![Pasted image 20241224214532.png](/img/user/resimler/Pasted%20image%2020241224214532.png)
 
-İlk Headers sekmesinde hem HTTP request hem de HTTP response header'larını görüyoruz. `Devtools` başlıkları otomatik olarak bölümler halinde düzenler, ancak ayrıntılarını `raw` formatlarda görüntülemek için ==`Raw`== butonuna tıklayabiliriz. Ayrıca, gelecek bölümde tartışılacağı gibi, request tarafından kullanılan cookie'leri görmek için `Cookies` sekmesini kontrol edebiliriz.
+İlk Headers sekmesinde hem HTTP request hem de HTTP response header'larını görüyoruz. `Devtools` başlıkları otomatik olarak bölümler halinde düzenler, ancak ayrıntılarını `raw` formatlarda görüntülemek için `Raw` butonuna tıklayabiliriz. Ayrıca, gelecek bölümde tartışılacağı gibi, request tarafından kullanılan cookie'leri görmek için `Cookies` sekmesini kontrol edebiliriz.
 
 ---
 
@@ -447,7 +447,7 @@ Content-Type: text/html; charset=UTF-8
 Access denied
 ```
 
-Gördüğümüz gibi, response body'de ==`Access denied`== ve `WWW-Authenticate` header'ında Basic `realm=“Access denied”` değerlerini alıyoruz, bu da Headers bölümünde tartışıldığı gibi bu sayfanın gerçekten basic HTTP auth kullandığını doğruluyor. Kimlik bilgilerini cURL aracılığıyla sağlamak için aşağıdaki gibi `-u` bayrağını kullanabiliriz:
+Gördüğümüz gibi, response body'de `Access denied` ve `WWW-Authenticate` header'ında Basic `realm=“Access denied”` değerlerini alıyoruz, bu da Headers bölümünde tartışıldığı gibi bu sayfanın gerçekten basic HTTP auth kullandığını doğruluyor. Kimlik bilgilerini cURL aracılığıyla sağlamak için aşağıdaki gibi `-u` bayrağını kullanabiliriz:
 
 ```shell-session
 M1R4CKCK@htb[/htb]$ curl -u admin:admin http://<SERVER_IP>:<PORT>/
@@ -539,7 +539,7 @@ Requeste tıkladığımızda, URL'de kullanılan GET parametresi `search=le` ile
 
 Şimdi, arama sonuçlarının tamamını almak için aynı isteği doğrudan `search.php`'ye gönderebiliriz, ancak muhtemelen yukarıdaki ekran görüntüsünde gösterilen HTML düzenine sahip olmadan bunları belirli bir biçimde (örneğin JSON) döndürecektir.
 
-`cURL` ile bir GET isteği göndermek için, GET istekleri parametrelerini URL'ye yerleştirdiğinden, yukarıdaki ekran görüntülerinde görülen URL'nin aynısını kullanabiliriz. Ancak, tarayıcı geliştirme araçları cURL komutunu elde etmek için daha uygun bir yöntem sağlar. İsteğe sağ tıklayabilir ve ==`Copy>Copy as cURL`== seçeneğini seçebiliriz. Daha sonra, kopyalanan komutu terminalimize yapıştırabilir ve çalıştırabiliriz ve tam olarak aynı yanıtı almalıyız:
+`cURL` ile bir GET isteği göndermek için, GET istekleri parametrelerini URL'ye yerleştirdiğinden, yukarıdaki ekran görüntülerinde görülen URL'nin aynısını kullanabiliriz. Ancak, tarayıcı geliştirme araçları cURL komutunu elde etmek için daha uygun bir yöntem sağlar. İsteğe sağ tıklayabilir ve `Copy>Copy as cURL` seçeneğini seçebiliriz. Daha sonra, kopyalanan komutu terminalimize yapıştırabilir ve çalıştırabiliriz ve tam olarak aynı yanıtı almalıyız:
 
 ```shell-session
 M1R4CKCK@htb[/htb]$ curl 'http://<SERVER_IP>:<PORT>/search.php?search=le' -H 'Authorization: Basic YWRtaW46YWRtaW4='
@@ -548,7 +548,7 @@ Leeds (UK)
 Leicester (UK)
 ```
 
-Not: Kopyalanan komut HTTP isteğinde kullanılan tüm header'ları içerecektir. Ancak, bunların çoğunu kaldırabilir ve yalnızca ==`Authorization`== header'ı gibi gerekli kimlik doğrulama header'larını tutabiliriz.
+Not: Kopyalanan komut HTTP isteğinde kullanılan tüm header'ları içerecektir. Ancak, bunların çoğunu kaldırabilir ve yalnızca `Authorization` header'ı gibi gerekli kimlik doğrulama header'larını tutabiliriz.
 
 Aynı isteği doğrudan tarayıcı devtools'u içinde `Copy>Copy as Fetch`'i seçerek de tekrarlayabiliriz. Bu, JavaScript `Fetch kütüphanesini` kullanarak aynı HTTP isteğini kopyalayacaktır. Ardından, `[CTRL+SHIFT+K]` tuşlarına tıklayarak JavaScript `console` sekmesine gidebilir, `Fetch` komutumuzu yapıştırabilir ve isteği göndermek için enter tuşuna basabiliriz:
 
@@ -596,7 +596,7 @@ username=admin&password=admin
 
 Elimizdeki request verileriyle, benzer bir isteği cURL ile göndermeyi deneyebilir ve bunun da giriş yapmamıza izin verip vermeyeceğini görebiliriz. Ayrıca, önceki bölümde yaptığımız gibi, istek üzerine sağ tıklayıp `Copy>Copy as cURL` seçeneğini seçebiliriz. Bununla birlikte, POST isteklerini manuel olarak oluşturabilmek önemlidir, bu yüzden bunu yapmayı deneyelim.
 
-Bir POST isteği göndermek için ==`-X POST`== bayrağını kullanacağız. Ardından, POST verilerimizi eklemek için `-d` bayrağını kullanabilir ve yukarıdaki verileri aşağıdaki gibi ekleyebiliriz:
+Bir POST isteği göndermek için `-X POST` bayrağını kullanacağız. Ardından, POST verilerimizi eklemek için `-d` bayrağını kullanabilir ve yukarıdaki verileri aşağıdaki gibi ekleyebiliriz:
 
 ```shell-session
 M1R4CKCK@htb[/htb]$ curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/
@@ -613,7 +613,7 @@ HTML kodunu incelersek, giriş formu kodunu görmeyeceğiz, ancak arama fonksiyo
 
 ## Authenticated Cookies
 
-Kimliğimiz başarıyla doğrulandıysa, tarayıcılarımızın kimlik doğrulamamızı sürdürebilmesi ve sayfayı her ziyaret ettiğimizde giriş yapmamız gerekmemesi için bir cookie almış olmamız gerekir. Kimliği doğrulanmış cookie'mizle birlikte ==`Set-Cookie`== header'ını içermesi gereken response'u görüntülemek için `-v` veya `-i` bayraklarını kullanabiliriz:
+Kimliğimiz başarıyla doğrulandıysa, tarayıcılarımızın kimlik doğrulamamızı sürdürebilmesi ve sayfayı her ziyaret ettiğimizde giriş yapmamız gerekmemesi için bir cookie almış olmamız gerekir. Kimliği doğrulanmış cookie'mizle birlikte `Set-Cookie` header'ını içermesi gereken response'u görüntülemek için `-v` veya `-i` bayraklarını kullanabiliriz:
 
 ```shell-session
 M1R4CKCK@htb[/htb]$ curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/ -i
@@ -666,7 +666,7 @@ Gördüğümüz gibi, arama formu `search.php`'ye aşağıdaki verilerle birlikt
 {"search":"london"}
 ```
 
-POST verileri `JSON` biçiminde görünmektedir, bu nedenle isteğimiz ==`Content-Type` header'ını `application/json`== olarak belirtmiş olmalıdır. İsteğe sağ tıklayıp `Copy>Copy Request Headers`'ı seçerek bunu doğrulayabiliriz:
+POST verileri `JSON` biçiminde görünmektedir, bu nedenle isteğimiz `Content-Type` header'ını `application/json` olarak belirtmiş olmalıdır. İsteğe sağ tıklayıp `Copy>Copy Request Headers`'ı seçerek bunu doğrulayabiliriz:
 
 ```bash
 POST /search.php HTTP/1.1

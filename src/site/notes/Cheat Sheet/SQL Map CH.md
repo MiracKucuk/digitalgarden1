@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/sql-map-ch/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/sql-map-ch/","created":"2024-12-14T17:52:03.179+03:00","updated":"2025-01-05T14:16:10.842+03:00"}
 ---
 
 

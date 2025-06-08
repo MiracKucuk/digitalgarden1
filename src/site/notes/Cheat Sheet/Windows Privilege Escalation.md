@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/windows-privilege-escalation/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/windows-privilege-escalation/","created":"2024-11-12T09:05:37.411+03:00","updated":"2025-01-05T14:16:20.232+03:00"}
 ---
 
 

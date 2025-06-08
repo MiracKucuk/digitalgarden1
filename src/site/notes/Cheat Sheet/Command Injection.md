@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/command-injection/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/command-injection/","created":"2024-12-13T12:48:48.920+03:00","updated":"2025-01-05T14:16:13.888+03:00"}
 ---
 
 | **Injection Operator** | **Injection Character** | **URL-Encoded Character** | **Executed Command**                       |

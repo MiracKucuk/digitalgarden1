@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/web-penters/1-web-request/"}
+{"dg-publish":true,"permalink":"/web-penters/1-web-request/","created":"2024-12-24T19:55:18.877+03:00","updated":"2025-06-04T01:03:51.811+03:00"}
 ---
 
  `www.hackthebox.com` gibi istenen web sitesine ulaşmak için bir `Uniform Resource Locator` (`URL`) olarak `Fully Qualified Domain Name` (`FQDN`) giriyoruz.

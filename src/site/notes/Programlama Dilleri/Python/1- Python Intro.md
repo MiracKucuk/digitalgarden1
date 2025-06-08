@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/programlama-dilleri/python/1-python-intro/"}
+{"dg-publish":true,"permalink":"/programlama-dilleri/python/1-python-intro/","created":"2025-06-07T23:42:40.965+03:00","updated":"2025-06-08T00:39:19.644+03:00"}
 ---
 
 

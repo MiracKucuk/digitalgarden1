@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/attacking-common-applications-cheat-sheet/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/attacking-common-applications-cheat-sheet/","created":"2024-12-28T01:20:04.039+03:00","updated":"2025-01-05T14:16:42.872+03:00"}
 ---
 
 

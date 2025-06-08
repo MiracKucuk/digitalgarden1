@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/ctf/lame-ctf/"}
+{"dg-publish":true,"permalink":"/ctf/lame-ctf/","created":"2025-02-05T19:59:50.927+03:00","updated":"2025-02-05T21:04:07.831+03:00"}
 ---
 
 Lame, HTB'de yayınlanan ilk kutuydu (söyleyebileceğim kadarıyla), ki ben henüz oynamaya başlamadan önceydi. Süper kolay bir kutudur, bir Metasploit script'i ile doğrudan bir root shell'e kolayca devrilebilir. Yine de, OSCP benzeri bazı yönleri var, bu yüzden Metasploit ile ve Metasploit olmadan göstereceğim ve exploitleri analiz edeceğim. Savunmasız bir sürüm olan VSFTPd sunucusuyla bir head-fake atıyor, ancak kutu remote exploitation'a izin vermeyecek şekilde yapılandırılmış. VSFTPd'yi Beyond Root'ta inceleyeceğim.

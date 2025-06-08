@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/ffuf/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/ffuf/","created":"2024-12-24T13:50:31.989+03:00","updated":"2025-01-05T01:23:15.037+03:00"}
 ---
 
 

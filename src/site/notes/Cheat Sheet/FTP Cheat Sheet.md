@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/ftp-cheat-sheet/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/ftp-cheat-sheet/","created":"2025-02-20T00:35:45.222+03:00","updated":"2025-02-20T23:35:28.227+03:00"}
 ---
 
 

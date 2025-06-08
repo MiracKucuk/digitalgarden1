@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/curl-cheat-sheet/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/curl-cheat-sheet/","created":"2025-02-07T01:07:16.869+03:00","updated":"2025-05-27T23:53:46.744+03:00"}
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/footprinting/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/footprinting/","created":"2024-12-26T13:32:52.100+03:00","updated":"2025-02-20T20:49:10.202+03:00"}
 ---
 
 

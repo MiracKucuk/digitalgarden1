@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/password-attacks-cheat-sheet/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/password-attacks-cheat-sheet/","created":"2024-11-02T16:44:54.371+03:00","updated":"2025-01-05T14:16:26.830+03:00"}
 ---
 
 

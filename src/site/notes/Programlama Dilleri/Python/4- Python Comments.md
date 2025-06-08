@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/programlama-dilleri/python/4-python-comments/"}
+{"dg-publish":true,"permalink":"/programlama-dilleri/python/4-python-comments/","created":"2025-06-08T00:34:30.998+03:00","updated":"2025-06-08T00:39:36.900+03:00"}
 ---
 
 

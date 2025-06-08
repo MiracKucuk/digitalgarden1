@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/nmap-cheat-sheet/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/nmap-cheat-sheet/","created":"2025-02-21T23:49:49.229+03:00","updated":"2025-02-22T00:42:30.432+03:00"}
 ---
 
 ### TCP SYN Scan

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/ctf/blocky-ctf/"}
+{"dg-publish":true,"permalink":"/ctf/blocky-ctf/","created":"2025-02-08T17:53:26.845+03:00","updated":"2025-02-08T18:30:14.546+03:00"}
 ---
 
 

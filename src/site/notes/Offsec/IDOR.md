@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/offsec/idor/"}
+{"dg-publish":true,"permalink":"/offsec/idor/","created":"2025-05-22T23:58:49.812+03:00","updated":"2025-05-23T23:13:23.648+03:00"}
 ---
 
 ## Insecure Direct Object Referencing (IDOR) – Güvensiz Doğrudan Obje Referansı

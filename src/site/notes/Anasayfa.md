@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/anasayfa/","tags":["gardenEntry"]}
+{"dg-publish":true,"permalink":"/anasayfa/","tags":["gardenEntry"],"created":"2025-01-04T00:44:47.386+03:00","updated":"2025-01-20T03:05:24.123+03:00"}
 ---
 
 

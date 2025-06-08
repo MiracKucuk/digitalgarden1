@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/xss-payload/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/xss-payload/","created":"2024-11-17T03:34:44.457+03:00","updated":"2025-06-01T11:10:50.658+03:00"}
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/programlama-dilleri/python/3-python-syntax/"}
+{"dg-publish":true,"permalink":"/programlama-dilleri/python/3-python-syntax/","created":"2025-06-08T00:19:37.606+03:00","updated":"2025-06-08T00:39:32.348+03:00"}
 ---
 
 

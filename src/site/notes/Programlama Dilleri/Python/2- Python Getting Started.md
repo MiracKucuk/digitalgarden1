@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/programlama-dilleri/python/2-python-getting-started/"}
+{"dg-publish":true,"permalink":"/programlama-dilleri/python/2-python-getting-started/","created":"2025-06-07T23:49:44.408+03:00","updated":"2025-06-08T00:39:28.652+03:00"}
 ---
 
 

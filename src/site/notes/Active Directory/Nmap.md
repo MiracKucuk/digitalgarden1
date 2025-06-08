@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active-directory/nmap/"}
+{"dg-publish":true,"permalink":"/active-directory/nmap/","created":"2025-01-30T22:38:29.754+03:00","updated":"2025-06-04T02:03:49.071+03:00"}
 ---
 
 TCP-SYN taraması (`-sS`) en popüler yöntemdir. SYN bayrağı gönderilir, tam bağlantı kurulmaz:

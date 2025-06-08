@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/file-transfer-cheat-sheet/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/file-transfer-cheat-sheet/","created":"2024-10-30T21:30:04.493+03:00","updated":"2025-02-08T14:15:28.981+03:00"}
 ---
 
 

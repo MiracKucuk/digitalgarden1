@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/portswigger/sql-injection/"}
+{"dg-publish":true,"permalink":"/portswigger/sql-injection/","created":"2024-12-12T13:23:52.815+03:00","updated":"2025-03-31T00:53:16.508+03:00"}
 ---
 
 ### **SQL Injection Tespiti**

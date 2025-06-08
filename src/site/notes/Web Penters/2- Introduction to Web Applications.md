@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/web-penters/2-introduction-to-web-applications/"}
+{"dg-publish":true,"permalink":"/web-penters/2-introduction-to-web-applications/","created":"2025-02-11T02:14:38.450+03:00","updated":"2025-06-04T01:07:03.752+03:00"}
 ---
 
 

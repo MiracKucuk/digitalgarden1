@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/portswigger/cors/"}
+{"dg-publish":true,"permalink":"/portswigger/cors/","created":"2025-06-02T16:32:46.035+03:00","updated":"2025-06-07T19:07:30.913+03:00"}
 ---
 
 

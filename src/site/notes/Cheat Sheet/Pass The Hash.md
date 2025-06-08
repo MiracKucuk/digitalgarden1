@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/cheat-sheet/pass-the-hash/"}
+{"dg-publish":true,"permalink":"/cheat-sheet/pass-the-hash/","created":"2024-11-04T18:05:04.524+03:00","updated":"2025-01-05T14:16:23.530+03:00"}
 ---
 
 

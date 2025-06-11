@@ -1,9 +1,9 @@
 ---
-{"dg-publish":true,"permalink":"/programlama-dilleri/javascript/2-java-script-nerede-kullanilir/","created":"2025-06-12T00:29:00.084+03:00","updated":"2025-06-12T00:52:06.312+03:00"}
+{"dg-publish":true,"permalink":"/programlama-dilleri/javascript/2-java-script-nerede-kullanilir/","created":"2025-06-12T00:29:00.084+03:00","updated":"2025-06-12T01:16:26.362+03:00"}
 ---
 
 
-## `<script>` Tag
+## `script` Tag
 
 HTML'de JavaScript kodu `<script>` ve `</script>` tagları arasına eklenir.
 
@@ -30,13 +30,13 @@ Eski JavaScript örnekleri **`type`** özelliğini kullanabilir:
 
 * İlerleyen bölümlerde fonksiyonlar ve event'ler hakkında çok daha fazla şey öğreneceksiniz.
 
-## `<head>` veya `<body>` içinde JavaScript
+## `head` veya `body` içinde JavaScript
 
 * Bir HTML document'e istediğiniz sayıda script yerleştirebilirsiniz.
 
 * Scriptler bir HTML sayfasının `<body>` veya `<head>` bölümüne ya da her ikisine birden yerleştirilebilir.
 
-## `<head>` içinde JavaScript
+## `head` içinde JavaScript
 
 * Bu örnekte, bir HTML sayfasının `<head>` bölümüne bir JavaScript `fonksiyonu` yerleştirilmiştir.
 
@@ -65,7 +65,7 @@ Eski JavaScript örnekleri **`type`** özelliğini kullanabilir:
 ```
 
 
-## `<body>` içinde JavaScript
+## `body` içinde JavaScript
 
 
 ```html

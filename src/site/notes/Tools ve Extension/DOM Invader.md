@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/tools-ve-extension/dom-invader/","created":"2025-06-10T16:29:31.544+03:00","updated":"2025-06-10T20:55:41.512+03:00"}
+{"dg-publish":true,"permalink":"/tools-ve-extension/dom-invader/","created":"2025-06-10T16:29:31.544+03:00","updated":"2025-06-11T22:36:23.201+03:00"}
 ---
 
 DOM Invader, hem web mesajı hem de prototype pollution vektörleri dahil olmak üzere çeşitli source ve sink'leri kullanarak DOM XSS güvenlik açıklarını test etmenize yardımcı olan tarayıcı tabanlı bir araçtır. Yalnızca Burp'ün built-in browser'ı üzerinden kullanılabilir ve burada bir extension olarak önceden yüklenmiş olarak gelir.
@@ -354,4 +354,244 @@ Belirli bir sink’in enjekte edilmesini (instrumentation) devre dışı bırakm
 
 # DOM Invader attack types
 
+Varsayılan olarak, DOM Invader otomatik olarak sıradan DOM XSS source'larını ve sinklerini araştırır, ancak isteğe bağlı olarak DOM Invader'ı diğer saldırıları deneyecek şekilde yapılandırabilirsiniz.
 
+![Pasted image 20250610231652.png](/img/user/Pasted%20image%2020250610231652.png)
+
+## Prototype pollution
+
+Bu ayar etkinleştirildiğinde, DOM Invader normal DOM XSS source'larından ve sink'lerinden başka client-side prototype pollution source'larını da otomatik olarak belirlemeye çalışır.
+
+DOM Invader'ın prototype pollution özellikleri hakkında daha fazla bilgi için [Client-side prototype pollution](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/prototype-pollution) testi bölümüne bakınız.
+
+Bu davranışın ince ayarını yapmak üzere bazı ek ayarlara erişmek için bu ayarın yanındaki çark simgesine tıklayabilirsiniz. Prototype pollution özgü yapılandırma ayarları hakkında daha fazla bilgi için prototype pollution settings bölümüne bakın.
+
+## DOM clobbering
+
+Bu ayar etkinleştirildiğinde, DOM Invader otomatik olarak DOM clobbering güvenlik açıklarını belirlemeye çalışır.
+
+Daha fazla bilgi için DOM Invader ile DOM clobbering testi bölümüne bakın.
+
+
+# Web message settings
+
+Web mesajlarını işlerken DOM Invader'ın davranışını ince ayarlamaya yönelik diğer ayarlara erişmek için `Postmessage interception` seçeneğinin yanındaki dişli simgesine tıklayabilirsiniz.
+
+![Pasted image 20250611002414.png](/img/user/Pasted%20image%2020250611002414.png)
+
+## Postmessage origin spoofing
+
+Bu ayar etkinleştirildiğinde, DOM Invader tüm message'ların origin'ini otomatik olarak gerçek origin'in domain adı ile başlayan ve biten sahte bir origin ile değiştirir. Böylece DOM Invader, message'ların originini doğrulamak için hatalı mantığa veya düzenli ifadelere dayanan event handler'ları otomatik olarak belirleyebilir.
+
+Örneğin, bazı web siteleri origin'deki domain adını doğrulamak için `startsWith()` veya `endsWith()` methodlarını kullanır. Bu tür bir doğrulama, bu teknikler kullanılarak kolayca atlatılabilir.
+
+Not : Bu ayar devre dışı bırakılırsa, message'ı replay ederken `Spoof origin` onay kutusunu seçerek bireysel requestlerin originini yine de taklit edebilirsiniz. Alternatif olarak, sağlanan domain'i kullanarak origini manuel olarak değiştirebilirsiniz.
+
+## Ele geçirilen mesajlara canary enjeksiyonu
+
+Bu ayar etkinleştirildiğinde, DOM Invader sayfada gönderilen tüm mesajların `data` özelliğine otomatik olarak canary enjekte eder. DOM Invader beklenen data'nın bir JSON string, JSON object veya plain string olup olmadığını belirler, ardından doğru formatı kullanarak canary'yi enjekte eder.
+
+Mesaj ayrıntılarını görüntülerken, sayfa tarafından gönderilen orijinal veriler ile otomatik enjeksiyonu içeren datalar arasında geçiş yapmak için `Show` açılır menüsünü kullanabilirsiniz.
+
+## Duplicate değerlere sahip mesajları filtreleme
+
+Bu ayar etkinleştirildiğinde, DOM Invader gürültüyü azaltmak için aynı mesajları birlikte gruplandırır. Bazı durumlarda, her bir mesajı görebilmek için bu ayarı devre dışı bırakmak isteyebilirsiniz. Örneğin, gönderildiklerinden emin olmak için mesajları tek tek görmek isteyebilirsiniz.
+
+## Generate automated messages
+
+Bu ayar etkinleştirildiğinde, DOM Invader kendi mesajlarını oluşturur ve sayfada tanımladığı tüm mesaj event listener'larına gönderir. Bu, potansiyel olarak savunmasız bir event handler'ı test etmek istediğiniz ancak sayfa ile normal şekilde etkileşime girerek bir mesaj event'ı tetikleyemediğiniz durumlarda kullanışlıdır.
+
+DOM Invader, her event handler'ın beklediği verilerin yapısı hakkında bilgi çıkarmaya çalışır. Daha sonra bu bilgiyi uygun bir mesaj oluşturmak ve göndermek için kullanır.
+
+Listener'ın her bir mesajı nasıl işlediğine bağlı olarak DOM Invader, potansiyel olarak daha tehlikeli sinklere yol açabilecek ek kod yollarını vurmak için özel olarak tasarlanmış takip mesajları (follow-up messages) oluşturabilir.
+
+Not : `Messages` view'de sayısal bir kimliğe sahip olmadıkları için DOM Invader'ın hangi mesajları oluşturduğunu anlayabilirsiniz.
+
+## Detect cross-domain leaks
+
+Bu ayar etkinleştirildiğinde, geçerli sayfa URL'den farklı bir origin'e data içeren bir web mesajı gönderdiğinde DOM Invader bunu rapor eder. Bu durumda, bir saldırgan, etkilenen sayfayı bir `iframe` içine yerleştirerek ve verileri ayıklayan bir event listener ile birlikte OAuth tokenları gibi hassas verileri çalabilir.
+
+
+# Prototype pollution settings
+
+`Prototype pollution` seçeneğinin yanındaki dişli simgesine tıklayarak DOM Invader'ın prototype pollution güvenlik açıklarını nasıl test edeceğine ilişkin ince ayarlara erişebilirsiniz.
+
+![Pasted image 20250611085510.png](/img/user/Pasted%20image%2020250611085510.png)
+
+## Scan for gadgets
+
+Bu ayar etkinleştirildiğinde, sayfa her yüklendiğinde DOM Invader otomatik olarak gadget'ları tarar. Belirli source'ları kullanarak gadget'ları tarayabilmenize rağmen, bu ayar herhangi bir source bulamadığınız durumlarda kullanışlı bir alternatiftir. Bu, sitenizin gelecekte istismar edilebilecek herhangi bir gadget içermediğinden emin olmanızı sağlar.
+
+## Auto-scale amount of properties per frame (frame başına özellik miktarını otomatik ölçeklendirme)
+
+Varsayılan olarak, DOM Invader prototype pollution gadget'larını tararken frame başına kullanılan özellik sayısını otomatik olarak ölçeklendirir. Bu, performansı artırmaya yardımcı olur, ancak gadget'ların gözden kaçmasına neden olur. Örneğin, enjekte edilen bir özellik, DOM Invader'ın aynı iframe içindeki diğer araçları test etmesini engelleyen bir istisnaya neden olarak yanlış negatif sonuçlara yol açabilir.
+
+İsterseniz bu ayarı devre dışı bırakabilir ve bunun yerine sabit bir sınır belirlemek için kaydırıcıyı kullanabilirsiniz. Limiti düşürmek taramanın daha uzun sürmesine neden olur, ancak gadget'ları kaçırma olasılığınızı azaltır. Sınırı artırmak ise tam tersi bir etki yaratır.
+
+
+## Nested özellikleri tarayın
+
+Varsayılan olarak, DOM Invader diğer özellikler içinde nested özellikleri recursively tarar. Bu ayarı devre dışı bırakırsanız, DOM Invader her object'in yalnızca en üst düzey özelliklerini kullanarak gadget'ları tarar.
+
+Örneğin, aşağıdaki object'i düşünün:
+
+```js
+const user = {
+    id: 1337,
+    name: "carlos",
+    contactInfo: {
+        email: "carlos@ginandjuice.shop",
+        phone: 0161133713371
+    }
+}
+```
+
+Varsayılan olarak, DOM Invader bu kullanıcı object'inin tüm özelliklerini test eder. Bu ayarı devre dışı bırakırsanız, hem `user.contactInfo.email` hem de `user.contactInfo.phone` özellikleri atlanacaktır.
+
+## Query string injection
+
+Varsayılan olarak, DOM Invader query string'deki parametreleri kullanarak prototype pollution için test yapar. Sitenin düzgün çalışmasını engelliyorsa bu ayarı devre dışı bırakmanız gerekebilir.
+
+## Hash injection
+
+Varsayılan olarak, DOM Invader URL'nin hash veya fragment kısmını kullanarak prototype pollution için test yapar. Sitenin düzgün çalışmasını engelliyorsa bu ayarı devre dışı bırakmanız gerekebilir.
+
+## JSON injection
+
+Varsayılan olarak, DOM Invader JSON-based web messages enjekte ederek prototype pollution test eder. Sitenin düzgün çalışmasını engelliyorsa bu ayarı devre dışı bırakmanız gerekebilir.
+
+## Verify onload
+
+Varsayılan olarak, DOM Invader prototype pollution hakkında rapor vermeden önce sayfanın yüklenmesinin bitmesini bekler. Bunun amacı, tanımlanan tüm gadget'ların son DOM'da hala mevcut olmasını sağlamaktır.
+
+Bu ayarı devre dışı bırakırsanız, DOM Invader potansiyel gadget'ları bulur bulmaz raporlar. Bu, tarama süresini kısaltabilir ancak yanlış pozitif sonuçlara neden olabilir. Örneğin, DOM Invader `constructor` veya `__proto__` özelliklerini kullanarak gadget'ları tanımlayabilir ve bunlar sayfa yüklenmeyi tamamladığında temizlenmiş olabilir.
+
+## Remove CSP header
+
+Bu ayar etkinleştirildiğinde, DOM Invader tüm response'lardan `Content-Security-Policy` header'ını kaldırır. Bu, CSP'nin potansiyel XSS vektörlerinin yanı sıra gadget'lar için tarama yaparken gerekli olan iframe'leri engellemesini önler.
+
+## Remove X-Frame-Options header
+
+Bu ayar etkinleştirildiğinde, DOM Invader tüm response'lardan `X-Frame-Options` header'ını kaldırır. Bu, gadget'lar için tarama yaparken gerekli olan iframe'leri engellemesini önler.
+
+
+## Her tekniği ayrı bir frame'de tarayın
+
+Performans nedenleriyle, DOM Invader varsayılan olarak en üst frame'deki prototype pollution için tarama yapar. Ancak, farklı tekniklerin birbiriyle etkileşime girdiği durumlarla karşılaşabilirsiniz, bu da güvenlik açıklarını kaçırmanıza neden olabilir. Örneğin, hem `__proto__` hem de `constructor`'ı aynı anda denemek, `constructor` tek başına çalışsa bile bazı sitelerde başarısız olur.
+
+Bu ayar etkinleştirildiğinde, DOM Invader her teknik için ayrı bir iframe kullanır. Bunun küçük bir performans etkisi olsa da, her tekniğin bağımsız olarak test edilmesini sağlayarak yanlış negatif olasılığını azaltır.
+
+
+## prototype pollution tekniklerinin devre dışı bırakılması
+
+DOM Invader, prototype pollution saldırıları için çeşitli teknikler kullanır. Ancak, bu tekniklerin hepsini aynı anda kullanmak bazı sitelerde saldırının başarısız olmasına neden olabilir. Bu nedenle, bazı teknikleri devre dışı bırakmayı ya da her seferinde yalnızca bir tekniği kullanmayı tercih edebilirsiniz.
+
+Prototype pollution tekniklerini devre dışı bırakmak için:
+
+1. DOM Invader ayarları menüsünden, `Attack types` altında, `Prototype pollution` switch'in yanındaki çark simgesine tıklayın.
+
+2. Dialog kutusunda `Techniques` butonuna tıklayın.
+
+3. Teknikleri gerektiği gibi etkinleştirmek veya devre dışı bırakmak için switch'leri kullanın.
+
+4. `Save` (Kaydet) düğmesine tıklayın ve ardından tarayıcıyı yenilemek için `Reload` (Yeniden Yükle) düğmesine tıklayın. Değişikliklerinizin etkili olabilmesi için bu gereklidir.
+
+# Miscellaneous (Çeşitli) DOM Invader settings
+
+DOM Invader ayarlar menüsüne erişmek için tarayıcının sağ üst köşesindeki Burp Suite logosuna tıklayın ve ardından DOM Invader sekmesine geçin.
+
+![Pasted image 20250611100313.png](/img/user/Pasted%20image%2020250611100313.png)
+
+`Misc` (Çeşitli) bölümünden aşağıdaki seçenekleri kontrol edebilirsiniz.
+
+
+## Stack trace ile Message filtering
+
+Bazı web siteleri çok sayıda message tetikler ve bu da gürültü miktarı nedeniyle test yapmayı zorlaştırabilir. Bu ayar etkinleştirildiğinde, DOM Invader her bir entry'nin stack trace'ini karşılaştırır ve kodda mevcut bir entry ile aynı konuma işaret edenleri gizler.
+
+## Auto-fire events
+
+Bu ayar etkinleştirildiğinde, DOM Invader sayfa yüklenir yüklenmez her element üzerinde otomatik olarak bir tıklama ve mouseover event'i tetikler. Bu, enjekte edilen payload'unuzun yalnızca bu event'lerden biri gerçekleştiğinde bir sink'e ulaştığı durumlarda kullanışlıdır.
+
+## Redirection prevention (Yeniden yönlendirme önleme)
+
+Bazı eylemlerinizin client-side başka bir sayfaya yönlendirmeye neden olduğunu görebilirsiniz. Bu, DOM Invader tarafından bulunan source'lar ve sinkler silinip yerine yeni sayfada bulunan source'lar ve sinkler ile güncelleneceği için testleri etkileyebilir.
+
+Bu ayar etkinleştirildiğinde, DOM Invader tüm client-side yönlendirmelerini engeller, böylece aynı sayfada kalırsınız. Ancak, `javascript:` URL'lerine yapılan yönlendirmeler veya URL Inject düğmesi tarafından başlatılan yönlendirmeler normal şekilde çalışmaya devam eder.
+
+## Yönlendirmeden önce breakpoint ekleyin
+
+`Redirection prevention` ayarını kullanarak client-side yönlendirmelerini tamamen engellemek yerine, yönlendirmeyi tetikleyen koddan hemen önce bir breakpoint ayarlamak için bu özelliği etkinleştirebilirsiniz. Şu anda Chrome'un standart DevTools'u kullanılarak bu mümkün değildir.
+
+Breakpoint eklemek, yönlendirmenin nerede gerçekleştiğini görmek için tarayıcının DevTools'unda call stack'ine bakmanızı sağlar, bu da debugging için yararlı olabilir.
+
+## Tüm source'lara canary enjekte edin
+
+Bu ayar etkinleştirildiğinde, DOM Invader sayfadaki tüm tanımlanmış source'lara otomatik olarak canary enjekte eder. Her source için canary'ye benzersiz bir string ekler, böylece hangi source'ların her sink'e aktığını kolayca belirleyebilirsiniz.
+
+Pratikte, canary'yi her yere enjekte etmek muhtemelen sitenin düzgün çalışmasını engelleyecektir. DOM Invader, canary'yi enjekte etmek için hangi parametrelerin ve source'ların kullanılacağını özelleştirmenize olanak tanır, böylece bu davranışa gerektiği gibi ince ayar yapabilirsiniz. Bu ayarın yanındaki dişli çark simgesine tıklarsanız aşağıdaki ayarlamaları yapabilirsiniz:
+
+* DOM Invader'ın atlaması için belirli source'ları devre dışı bırakın. Bu özelliği daha etkili bir şekilde kullanmak için sorunlu source'ları kademeli olarak ortadan kaldırmak isteyebilirsiniz. Belirli bir source'a odaklanmak için source'ları devre dışı bırakmak da isteyebilirsiniz. Bu sayede her yeni sayfa yüklediğinizde canary'yi source'a manuel olarak yapıştırmak zorunda kalmazsınız.
+
+* DOM Invader'ın canary'yi enjekte etmesi gereken belirli parametrelerin virgülle ayrılmış bir listesini sağlayın.
+
+![Pasted image 20250611221832.png](/img/user/Pasted%20image%2020250611221832.png)
+
+## Configuring callbacks
+
+DOM Invader'ı source'ları, sink'leri veya web mesajlarını her tanımladığında özel callback fonksiyonlarını çalıştıracak şekilde yapılandırabilirsiniz. Kendi özel callback'inizi oluşturabilir veya sonuçları basitçe konsola kaydederek dışa aktarmanızı sağlayan varsayılanı kullanabilirsiniz.
+
+![Pasted image 20250611221936.png](/img/user/Pasted%20image%2020250611221936.png)
+
+Bir başka yararlı callback, DOM Invader kontrol edilebilir bir sink tanımladığında kod yürütmesini duraklatmak için bir debugger deyimi içerebilir. Bu, call stack'i incelemenizi sağlayacaktır.
+
+Varsayılan callback fonksiyonu kullanıma hazırdır, ancak aşağıdaki şekilde etkinleştirmeniz gerekir:
+
+1. DOM Invader ayarları menüsünden, soruce'lar ve sink ayarlarını açmak için ana DOM Invader anahtarının yanındaki dişli simgesine tıklayın.
+
+2. Hangi sonuç türü için bir callback yapılandırmak istediğinize bağlı olarak `Sources`, `Sinks` veya `Messages` sekmesini seçin.
+
+3. DOM Invader'ın default callback fonksiyonunu görüntülemek için `Callback configuration` butonuna tıklayın. Başlangıçta bu devre dışıdır.
+
+4. Etkinleştirmek için script dosyasını içeren metin alanına tıklayın.
+
+5. Script dosyasını olduğu gibi bırakın ya da istediğiniz değişiklikleri yapın ve ardından `Save`'e tıklayın.
+
+6. Tarayıcıyı yenilemek için Click `Reload`'ye tıklayın. Değişikliklerinizin etkili olması için bu gereklidir.
+
+7. DOM Invader'ı normal şekilde kullanın ve callback'in beklendiği gibi çalışıp çalışmadığını kontrol edin.
+
+
+## Remove Permissions-Policy header
+
+* Bu ayar etkinleştirildiğinde, DOM Invader mevcut olduğunda response'lardan `Permissions-Policy` header'ını otomatik olarak kaldırır.
+* Bazı web siteleri, `Permissions-Policy` header aracılığıyla DOM Invader'ın fonksiyonelliği için gerekli olan senkronize XHR gibi özellikleri engelleyen direktifler ayarlar. Bu durumda, DOM Invader sizi konsol aracılığıyla bilgilendirir ve bu ayarı etkinleştirmenizi ister.
+
+
+# DOM Invader canary settings
+
+DOM Invader ayarları menüsünden, DOM Invader'ın hedef siteye enjekte ettiği canary string'i değiştirebilir ve güncelleyebilirsiniz.
+
+`DOM Invader` settings menüsüne erişmek için tarayıcının sağ üst köşesindeki Burp Suite logosuna tıklayın ve ardından DOM Invader sekmesine geçin.
+
+![Pasted image 20250611222829.png](/img/user/Pasted%20image%2020250611222829.png)
+
+Ayarlar menüsünün alt kısmında, DOM Invader'ın izlemekte olduğu geçerli canary string'i görebilirsiniz. Aşağıdaki seçeneklere sahipsiniz.
+
+## Copying the canary
+
+Geçerli canary stringini panonuza kopyalamak için `Copy` (Kopyala) düğmesine tıklayabilirsiniz. Bu, stringi farklı source'lara manuel olarak enjekte etmek için kullanışlıdır.
+
+## Changing the canary
+
+Rastgele oluşturulan varsayılan canary'yi istediğiniz zaman değiştirebilir ve bunun yerine kendi özel canary stringinizi takip edebilirsiniz.
+
+Canary'yı değiştirmek için:
+
+1- Varsayılan canary yerine kullanmak istediğiniz stringi girin. Alternatif olarak, yeni bir rastgele string oluşturmak için `Randomize`'a tıklayın.
+
+2- Click **`Update canary`**.
+
+3- Tarayıcıyı yenilemek için `Reload` (Yeniden Yükle) düğmesine tıklayın. Değişikliklerinizin etkili olması için bu gereklidir. DOM Invader artık bunun yerine yeni canary stringini izleyecektir.
+
+Not : Yanlış pozitifleri önlemek için, kullandığınız stringin sayfada native olarak bulunmadığından emin olun.
